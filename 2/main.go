@@ -5,6 +5,9 @@ import (
 	"sync"
 )
 
+//Написать программу, которая конкурентно рассчитает
+//значение квадратов чисел взятых из массива (2,4,6,8,10) и выведет их квадраты в stdout.
+
 /*
 func main() {
 	arr := [5]int{2, 4, 6, 8, 10} // создаем массив из 5 элементов int
@@ -25,24 +28,24 @@ func square(v int, wg *sync.WaitGroup) {
 */
 
 func main() {
-	arr := [5]int{2, 4, 6, 8, 10}
-	c := make(chan int, 5)
+	arr := [5]int{2, 4, 6, 8, 10} // создаем массив из 5 элементов int
+	c := make(chan int, 5)        // создаем буферизированный канал с емкостью 5
 
 	var wg sync.WaitGroup
 
-	for _, v := range arr {
+	for _, v := range arr { // перебираем элементы массива
 		wg.Add(1)
 		go square(c, &wg, v)
 	}
 	wg.Wait()
-	close(c)
+	close(c) // закрываем канал
 
 	for i := 0; i < cap(c); i++ {
-		fmt.Println(<-c)
+		fmt.Println(<-c) // получаем данные с канала
 	}
 }
 
 func square(c chan int, wg *sync.WaitGroup, v int) {
-	c <- v * v
+	c <- v * v // отправляем данные в канал
 	wg.Done()
 }

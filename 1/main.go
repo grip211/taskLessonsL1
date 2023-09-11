@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+//Реализовать встраивание методов в структуре Action
+//от родительской структуры Human (аналог наследования)
+
 type Human struct {
 	Action
 	name    string
