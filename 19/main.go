@@ -13,3 +13,18 @@ func Reverse(s string) string {
 func main() {
 	fmt.Println(Reverse("главрыба"))
 }
+
+/*
+import (
+	"fmt"
+
+	"4d63.com/strrev"
+)
+
+func main() {
+	r := strrev.Reverse("главрыба")
+
+	fmt.Println(r)
+
+}
+*/
